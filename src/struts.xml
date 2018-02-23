@@ -16,7 +16,7 @@
 		<action name="CustomerAction_*" class="customerAction" method="{1}">
 			<result name="list">/jsp/customer/list.jsp</result>
 		</action>
-		<action name="BaseDictAction_*" class="baseDictAction" method="{1}">
+		<action name="BaseDictAction" class="baseDictAction" >
 
 		</action>
 	</package>
