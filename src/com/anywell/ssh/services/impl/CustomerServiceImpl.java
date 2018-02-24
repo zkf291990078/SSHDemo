@@ -10,24 +10,39 @@ import com.anywell.ssh.services.CustomerService;
 import com.anywell.ssh.utils.PageBean;
 
 public class CustomerServiceImpl implements CustomerService {
-	
+
 	private CustomerDao cd;
 
 	public void setCd(CustomerDao cd) {
 		this.cd = cd;
 	}
 
-
 	@Override
 	public PageBean<Customer> findPageBean(DetachedCriteria dc, Integer currentPage, Integer pagesize) {
 		// TODO Auto-generated method stub
-		int totalCount= cd.findTotalCount(dc);
-		PageBean< Customer> pageBean=new PageBean<>(currentPage, totalCount, pagesize);
-		List<Customer> list= cd.findDataByPage(dc, pageBean.getStart(), pageBean.getPageSize());
+		int totalCount = cd.findTotalCount(dc);
+		PageBean<Customer> pageBean = new PageBean<>(currentPage, totalCount, pagesize);
+		List<Customer> list = cd.findDataByPage(dc, pageBean.getStart(), pageBean.getPageSize());
 		pageBean.setList(list);
 		return pageBean;
 	}
 
-	
-	
+	@Override
+	public void saveCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		cd.save(customer);
+	}
+
+	@Override
+	public Customer getById(Long custId) {
+		// TODO Auto-generated method stub
+		return cd.getById(custId);
+	}
+
+	@Override
+	public void updateCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		cd.update(customer);
+	}
+
 }

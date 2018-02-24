@@ -75,11 +75,18 @@
 		scope="prototype">
 		<property name="cs" ref="customerService"></property>
 	</bean>
+
 	<bean name="userAction" class="com.anywell.ssh.web.action.UserAction"
 		scope="prototype"></bean>
+
 	<bean name="baseDictAction" class="com.anywell.ssh.web.action.BaseDictAction"
 		scope="prototype">
 		<property name="bs" ref="baseDictService"></property>
+	</bean>
+
+	<bean name="linkManAction" class="com.anywell.ssh.web.action.LinkManAction"
+		scope="prototype">
+		<property name="ls" ref="linkManService"></property>
 	</bean>
 
 	<bean name="customerService" class="com.anywell.ssh.services.impl.CustomerServiceImpl">
@@ -88,10 +95,17 @@
 	<bean name="baseDictService" class="com.anywell.ssh.services.impl.BaseDictServiceImpl">
 		<property name="bd" ref="baseDictDao"></property>
 	</bean>
+	<bean name="linkManService" class="com.anywell.ssh.services.impl.LinkManServiceImpl">
+		<property name="ld" ref="linkManDao"></property>
+	</bean>
+
 	<bean name="baseDictDao" class="com.anywell.ssh.dao.impl.BaseDictDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean name="customerDao" class="com.anywell.ssh.dao.impl.CustomerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean name="linkManDao" class="com.anywell.ssh.dao.impl.LinkManDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 

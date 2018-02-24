@@ -17,6 +17,7 @@
 				$("#currentPageInput").val(pageNum);
 			//2 提交表单
 				$("#pageForm").submit();
+		
 	};
 	
 	function changePageSize(pageSize){
@@ -25,6 +26,17 @@
 		//2 提交表单
 			$("#pageForm").submit();
 	};
+	function selectCustomer(cust_name,cust_id){
+		//获得添加页面的window对象
+		var win = window.opener;
+		//获得添加页面的document对象
+		var doc = win.document;
+		//获得隐藏域,和 文本框,并赋值
+		doc.getElementById("cust_id").value=cust_id;
+		doc.getElementById("cust_name").value=cust_name;
+		//关闭当前窗口
+		window.close();
+	}
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
@@ -64,7 +76,7 @@
 								<TR>
 									<TD height=25>
 									<FORM id="pageForm" name="customerForm"
-										action="${pageContext.request.contextPath }/CustomerAction_list"
+										action="${pageContext.request.contextPath }/CustomerAction_list	<s:if test="#parameters.select!=null">?select=true</s:if>"
 										method=post>
 										<!-- 隐藏域.当前页码 -->
 										<input type="hidden" name="currentPage" id="currentPageInput" value="<s:property value="#pageBean.currentPage" />" />
@@ -124,9 +136,14 @@
 													<s:property value="#cust.cust_mobile" />
 													</TD>
 													<TD>
-													<a href="${pageContext.request.contextPath }/customerServlet?method=edit&custId=${customer.cust_id}">修改</a>
+													<s:if test="#parameters.select==null">
+													<a href="${pageContext.request.contextPath }/CustomerAction_edit?cust_id=<s:property value="#cust.cust_id" />">修改</a>
 													&nbsp;&nbsp;
 													<a href="${pageContext.request.contextPath }/customerServlet?method=delete&custId=${customer.cust_id}">删除</a>
+													</s:if>
+													<s:else>
+													<a onclick="selectCustomer('<s:property value="#cust.cust_name"/>',<s:property value="#cust.cust_id" />)">选择</a>
+													</s:else>
 													</TD>
 												</TR>
 												</s:iterator>
